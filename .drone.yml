@@ -1,0 +1,22 @@
+kind: pipeline
+name: build monitoring
+
+environment:
+  AZ_ACR_NAME: 
+steps:
+  - name: build image
+    image: mcr.microsoft.com/azure-cli
+    environment: 
+      AZ_ACR_NAME:
+        from_secret: AZ_ACR_NAME
+      AZ_TENANT_ID:
+        from_secret: AZ_TENANT_ID
+      AZ_SUBSCRIPTION_ID: 
+        from_secret: AZ_SUBSCRIPTION_ID
+      ARM_CLIENT_ID:
+        from_secret: ARM_CLIENT_ID
+      ARM_CLIENT_SECRET:
+        from_secret: ARM_CLIENT_SECRET
+    commands:
+    - az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZ_TENANT_ID
+    - az acr build -t sample/hello-world:{{$DRONE_BUILD_NUMBER}} -r $AZ_ACR_NAME .
