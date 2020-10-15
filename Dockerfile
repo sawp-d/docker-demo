@@ -4,6 +4,7 @@ VOLUME /terraform
 
 ENV terraform_version 0.13.4
 ENV vault_version 1.5.4
+ENV DEBIAN_FRONTEND "noninteractive"
 
 RUN apt-get update && \
     apt-get install -y docker curl unzip jq python3 git bash && \
