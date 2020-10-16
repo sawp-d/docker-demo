@@ -14,7 +14,10 @@ RUN apt-get update && \
     wget https://releases.hashicorp.com/vault/${vault_version}/vault_${vault_version}_linux_amd64.zip && \
     unzip vault_${vault_version}_linux_amd64.zip -d bin/ && \
     rm vault_${vault_version}_linux_amd64.zip && \
-    curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+    curl -sL https://aka.ms/InstallAzureCLIDeb | bash && \
+    vault --version && \
+    terraform --version && \
+    az --version
 
 WORKDIR /terraform
 
