@@ -18,5 +18,7 @@ steps:
       ARM_CLIENT_SECRET:
         from_secret: ARM_CLIENT_SECRET
     commands:
-    - az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $AZ_TENANT_ID
-    - az acr build -t sample/hello-world:{{$DRONE_BUILD_NUMBER}} -r $AZ_ACR_NAME .
+   # - az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $AZ_TENANT_ID
+   # - az acr build -t sample/hello-world:{{$DRONE_BUILD_NUMBER}} -r $AZ_ACR_NAME .
+    - until [ az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID --output none || $RETRIES -ge $MAX_RETRIES ]; do echo "Waiting for service principal..."; RETRIES=$((RETRIES+1)); sleep 2; done
+    - echo $RETRIES
