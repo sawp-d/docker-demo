@@ -7,6 +7,9 @@ steps:
   - name: build image
     #image: mcr.microsoft.com/azure-cli
     image: docker
+    volumes:
+      - name: docker_sock
+        path: /var/run/docker.sock
     environment: 
       ARM_CLIENT_ID:
         from_secret: ARM_CLIENT_ID
