@@ -3,11 +3,7 @@ name: build monitoring
 
 steps:
   - name: consume image
-    image: swacr.azurecr.io/sample/hello-world
+    image: docker:git
     commands: 
-    - az --version
-    - vault --version
-    - terraform --version
-
-image_pull_secrets:
-- dockerconfigjson
+    - git tag 1.0.1
+    - git push origin --tags
