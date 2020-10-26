@@ -4,6 +4,13 @@ name: build monitoring
 environment:
   AZ_ACR_NAME: 
 steps:
+  - name: consume image
+    image: swacr.azurecr.io/sample/hello-world
+    commands: 
+    - az --version
+    - vault --version
+    - terraform --version
+    
   - name: build image
     image: mcr.microsoft.com/azure-cli
     environment: 
@@ -27,3 +34,5 @@ steps:
     # - docker build -t "sample/hello-world:$DRONE_SEMVER" .
     - az acr build -t sample/hello-world:"1.0.$DRONE_BUILD_NUMBER" -r $AZ_ACR_NAME --no-push .
 
+image_pull_secrets:
+- dockerconfigjson
