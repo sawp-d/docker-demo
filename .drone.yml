@@ -27,5 +27,6 @@ steps:
     - DRONE_SEMVER_PATCH=$DRONE_BUILD_NUMBER
     - DRONE_SEMVER="$DRONE_SEMVER_MAJOR.$DRONE_SEMVER_MINOR.$DRONE_SEMVER_PATCH"
     - echo $DRONE_SEMVER
-    
+    - az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $AZ_TENANT_ID
+    - az acr build --subscription $AZ_SUBSCRIPTION_ID -t devnetlab/devnet_lab_image:{{$DRONE_SEMVER}} -r $AZ_ACR_NAME --no-push .
 
