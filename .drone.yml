@@ -14,7 +14,7 @@ steps:
       - echo $VERSION
       - VERSION="1.0.2"
       
-  - name: test1
+  - name: test2
     image: ubuntu:18.04
     environment:
       <<: *tf_vars
