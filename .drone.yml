@@ -6,20 +6,19 @@ globals:
     VERSION: 1.0.1
     
 steps:
-  - name: test1
-    image: ubuntu:18.04
+  - name: trivy image
+    image: aquasec/trivy
     environment:
       <<: *tf_vars
     commands:
-      - echo $VERSION
-      - VERSION="1.0.2"
+      - trivy image plugins/docker:19.03.8
       
-  - name: test2
-    image: ubuntu:18.04
+  - name: dockle image
+    image: goodwithtech/dockle
     environment:
       <<: *tf_vars
     commands:
-      - echo $VERSION
+      - dockle plugins/docker:19.03.8
    
    
       
