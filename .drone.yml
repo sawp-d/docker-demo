@@ -11,7 +11,7 @@ steps:
     environment:
       <<: *tf_vars
     commands:
-      - trivy image plugins/docker:19.03.8
+      - trivy image plugins/docker:19.03.8 --exit-code 1
       
   - name: dockle image
     image: goodwithtech/dockle
