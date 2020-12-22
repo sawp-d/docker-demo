@@ -18,7 +18,7 @@ steps:
     environment:
       <<: *tf_vars
     commands:
-      - dockle plugins/docker:19.03.8
+      - dockle plugins/docker:19.03.8 --exit-code 1
    
    
       
