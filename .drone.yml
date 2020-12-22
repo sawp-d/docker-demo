@@ -11,14 +11,14 @@ steps:
     environment:
       <<: *tf_vars
     commands:
-      - trivy image --exit-code 1 plugins/docker:19.03.8 
+      - trivy image --exit-code 1 --severity CRITICAL plugins/docker:19.03.8 
       
   - name: dockle image
     image: goodwithtech/dockle
     environment:
       <<: *tf_vars
     commands:
-      - dockle plugins/docker:19.03.8 --exit-code 1
+      - dockle --exit-code 1 plugins/docker:19.03.8 
    
    
       
