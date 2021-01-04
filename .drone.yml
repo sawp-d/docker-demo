@@ -20,6 +20,17 @@ steps:
       <<: *tf_vars
     commands:
       - dockle --ignore CIS-DI-0009 --exit-code 1 --exit-level fatal plugins/docker:19.03.8 
+      
+  - name: grype image
+    image: ubuntu:20.04
+    environment:
+      <<: *tf_vars
+    commands:
+      - curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
+      - grype plugins/docker:19.03.8 --scope all-layers --fail-on critical
+      
+      
+      
    
    
       
