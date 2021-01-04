@@ -26,7 +26,8 @@ steps:
     environment:
       <<: *tf_vars
     commands:
-      - apt-get install curl
+      - apt-get update
+      - apt-get -y install curl
       - curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
       - grype plugins/docker:19.03.8 --scope all-layers --fail-on critical
       
