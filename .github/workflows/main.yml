@@ -41,4 +41,4 @@ jobs:
           # The image to scan. This option is mutually exclusive with "path". 
           image: plugins/docker:19.03.8 
           # Set to any value to cause build to fail upon failed anchore policy evaluation
-          fail-build: true # optional, default is false
+          fail-build: false # optional, default is false
