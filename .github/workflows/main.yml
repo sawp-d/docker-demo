@@ -42,3 +42,11 @@ jobs:
           image: plugins/docker:19.03.8 
           # Set to any value to cause build to fail upon failed anchore policy evaluation
           fail-build: false # optional, default is false
+
+      - name: Container image scan
+        uses: Azure/container-scan@v0
+        with:
+          # Docker image to scan
+          image-name: plugins/docker:19.03.8 
+          # Add additional checks to ensure the image is secure and follows best practices and CIS standards
+          run-quality-checks: true # optional, default is true
