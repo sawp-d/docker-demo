@@ -35,3 +35,10 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      - name: Anchore Container Scan
+        uses: anchore/scan-action@v2.0.2
+        with:
+          # The image to scan. This option is mutually exclusive with "path". 
+          image: plugins/docker:19.03.8 
+          # Set to any value to cause build to fail upon failed anchore policy evaluation
+          fail-build: true # optional, default is false
