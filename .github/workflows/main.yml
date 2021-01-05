@@ -48,5 +48,7 @@ jobs:
         with:
           # Docker image to scan
           image-name: plugins/docker:19.03.8 
+          # Minimum severities of vulnerabilities to be displayed (UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL)
+          severity-threshold: MEDIUM # optional, default is HIGH:  
           # Add additional checks to ensure the image is secure and follows best practices and CIS standards
           run-quality-checks: true # optional, default is true
