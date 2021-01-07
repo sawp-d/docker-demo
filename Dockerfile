@@ -17,7 +17,9 @@ RUN apt-get update && \
     curl -sL https://aka.ms/InstallAzureCLIDeb | bash && \
     vault --version && \
     terraform --version && \
-    az --version
+    az --version && \
+    curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin && \
+    trivy filesystem --exit-code 1 --no-progress
 
 WORKDIR /terraform
 
