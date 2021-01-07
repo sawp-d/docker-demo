@@ -22,8 +22,8 @@ steps:
     environment:
       <<: *tf_vars
     commands:
-      - cat results01.json
-      - cat results02.json
+     # - cat results01.json
+     # - cat results02.json
       
   - name: dockle image
     image: goodwithtech/dockle
