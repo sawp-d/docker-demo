@@ -19,6 +19,7 @@ RUN apt-get update && \
     terraform --version && \
     az --version && \
     curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin && \
+    trivy filesystem --exit-code 0 --severity LOW,MEDIUM,HIGH --no-progress . && \
     trivy filesystem --exit-code 1 --severity CRITICAL --no-progress .
 
 WORKDIR /terraform
