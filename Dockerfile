@@ -21,7 +21,7 @@ RUN apt-get update && \
     #curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin && \
     #trivy filesystem --exit-code 0 --severity LOW,MEDIUM,HIGH --no-progress . && \
     #trivy filesystem --exit-code 1 --severity CRITICAL --no-progress . && \
-    curl -sL https://github.com/goodwithtech/dockle/releases/download/v0.3.1/dockle_0.3.1_Linux-64bit.tar.gz && \
+    wget https://github.com/goodwithtech/dockle/releases/download/v0.3.1/dockle_0.3.1_Linux-64bit.tar.gz && \
     unzip dockle_0.3.1_Linux-64bit.tar.gz -d bin/ && \
     rm dockle_0.3.1_Linux-64bit.tar.gz && \
     dockle --input .
