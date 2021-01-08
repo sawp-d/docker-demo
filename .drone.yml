@@ -11,7 +11,7 @@ steps:
     environment:
       <<: *tf_vars
     commands:
-      - trivy image snyk/snyk-cli:npm
+      - trivy fs .
       #- trivy image --exit-code 0 --severity LOW,MEDIUM,HIGH plugins/docker:19.03.8 
      # - trivy image --exit-code 1 --severity CRITICAL plugins/docker:19.03.8 
       #- trivy image --exit-code 0 --severity LOW,MEDIUM,HIGH -f json -o results01.json plugins/docker:19.03.8 
