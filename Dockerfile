@@ -21,8 +21,10 @@ RUN apt-get update && \
     #curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin && \
     #trivy filesystem --exit-code 0 --severity LOW,MEDIUM,HIGH --no-progress . && \
     #trivy filesystem --exit-code 1 --severity CRITICAL --no-progress . && \
-    curl -L -o dockle.deb https://github.com/goodwithtech/dockle/releases/download/v0.31/dockle_v0.31_Linux-64bit.deb && \
-    dpkg -i dockle.deb && rm dockle.deb
+    curl -sL https://github.com/goodwithtech/dockle/releases/download/v0.3.1/dockle_0.3.1_Linux-64bit.tar.gz && \
+    unzip dockle_0.3.1_Linux-64bit.tar.gz -d bin/ && \
+    rm dockle_0.3.1_Linux-64bit.tar.gz && \
+    dockle --input .
 
 WORKDIR /terraform
 
