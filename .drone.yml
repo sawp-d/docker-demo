@@ -27,7 +27,7 @@ steps:
        - echo $DRONE_SEMVER
        - az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $AZ_TENANT_ID
        # - docker build -t "sample/hello-world:$DRONE_SEMVER" .
-       - az acr build -t sample/sw-hello-world:"1.0.$DRONE_BUILD_NUMBER" -r $AZ_ACR_NAME --no-push .
+       - az acr build -t sw-hello-world:"1.0.$DRONE_BUILD_NUMBER" -r $AZ_ACR_NAME --no-push .
   - name: trivy image
     image: aquasec/trivy
     environment:
@@ -52,7 +52,7 @@ steps:
     environment:
       <<: *tf_vars
     commands:
-      - dockle --exit-code 1 sample/sw-hello-world:"1.0.$DRONE_BUILD_NUMBER"
+      - dockle --exit-code 1 sw-hello-world:"1.0.$DRONE_BUILD_NUMBER"
       
       
       
