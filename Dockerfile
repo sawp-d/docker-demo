@@ -7,7 +7,8 @@ ENV vault_version 1.5.4
 ENV DEBIAN_FRONTEND "noninteractive"
 
 RUN apt-get update && \
-    apt-get install -y docker wget curl unzip jq python3 python3-pip git bash dpkg && \
+    apt-get install -y curl && \
+    #apt-get install -y docker wget curl unzip jq python3 python3-pip git bash dpkg && \
     #wget https://releases.hashicorp.com/terraform/$terraform_version/terraform_${terraform_version}_linux_amd64.zip && \
     #unzip terraform_${terraform_version}_linux_amd64.zip -d bin/ && \
     #rm terraform_${terraform_version}_linux_amd64.zip && \
