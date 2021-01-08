@@ -25,8 +25,14 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+    
+      - name: Azure CLI Action
+        uses: Azure/cli@1.0.4
+        with:
+          # Specify the script here
+          inlineScript: az acr build -t sample/sw-helloworld:${{ github.sha }} -r swacr --no-push .
       
-      - run: docker build . -t swacr.azurecr.io/sample/sw-helloworld:${{ github.sha }}
+#      - run: docker build . -t swacr.azurecr.io/sample/sw-helloworld:${{ github.sha }}
       
       - uses: Azure/container-scan@v0
         with:
