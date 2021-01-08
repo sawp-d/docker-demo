@@ -22,7 +22,7 @@ RUN apt-get update && \
     #trivy filesystem --exit-code 0 --severity LOW,MEDIUM,HIGH --no-progress . && \
     #trivy filesystem --exit-code 1 --severity CRITICAL --no-progress . && \
     wget https://github.com/goodwithtech/dockle/releases/download/v0.3.1/dockle_0.3.1_Linux-64bit.tar.gz && \
-    unzip dockle_0.3.1_Linux-64bit.tar.gz -d bin/ && \
+    tar dockle_0.3.1_Linux-64bit.tar.gz -d bin/ && \
     rm dockle_0.3.1_Linux-64bit.tar.gz && \
     dockle --input .
 
