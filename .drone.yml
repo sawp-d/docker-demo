@@ -6,36 +6,17 @@ globals:
     VERSION: 1.0.1
     
 steps:
-  - name: build image
-    image: mcr.microsoft.com/azure-cli
-    environment: 
-      ARM_CLIENT_ID:
-       from_secret: ARM_CLIENT_ID
-      ARM_CLIENT_SECRET:
-       from_secret: ARM_CLIENT_SECRET
-      AZ_ACR_NAME:
-       from_secret: AZ_ACR_NAME
-      AZ_TENANT_ID:
-       from_secret: AZ_TENANT_ID
-      AZ_SUBSCRIPTION_ID: 
-       from_secret: AZ_SUBSCRIPTION_ID
-      DOCKLE_USERNAME:
-       from_secret: DOCKLE_USERNAME
-      DOCKLE_PASSWORD:
-       from_secret: DOCKLE_PASSWORD
-      RETRIES: 0
-      MAX_RETRIES: 3
+  - name: docker  
+    image: plugins/docker
+    settings:
+      repo: sample/sw-hello-world
+      tags: '1.0.${DRONE_BUILD_NUMBER}'
+      dry-run: true
+      
+  - name: dockle
+    image: goodwithtech/dockle
     commands:
-       - DRONE_SEMVER_PATCH=$DRONE_BUILD_NUMBER
-       - DRONE_SEMVER="drone$DRONE_SEMVER_PATCH"
-       - echo $DRONE_SEMVER
-       - az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $AZ_TENANT_ID
-       # - docker build -t "sample/hello-world:$DRONE_SEMVER" .
-       - az acr build -t sample/sw-hello-world:"1.0.$DRONE_BUILD_NUMBER" -r $AZ_ACR_NAME --no-push .
-       - wget https://github.com/goodwithtech/dockle/releases/download/v0.3.1/dockle_0.3.1_Linux-64bit.tar.gz
-       - tar -xf dockle_0.3.1_Linux-64bit.tar.gz -C /usr/local/bin
-       - rm dockle_0.3.1_Linux-64bit.tar.gz
-      # - dockle --exit-code 1 swacr.azurecr.io/sample/sw-hello-world:"1.0.$DRONE_BUILD_NUMBER"
+      - dockle sample/sw-hello-world:'1.0.${DRONE_BUILD_NUMBER}'
        
   - name: trivy image
     image: aquasec/trivy
