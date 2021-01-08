@@ -24,9 +24,8 @@ RUN apt-get update && \
     #trivy filesystem --exit-code 1 --severity CRITICAL --no-progress . && \
     wget https://github.com/goodwithtech/dockle/releases/download/v0.3.1/dockle_0.3.1_Linux-64bit.tar.gz && \
     tar -xf dockle_0.3.1_Linux-64bit.tar.gz -C bin/ && \
-    rm dockle_0.3.1_Linux-64bit.tar.gz && \
-    dockle --input .
-
+    rm dockle_0.3.1_Linux-64bit.tar.gz
+    
 WORKDIR /terraform
 
 CMD bash
