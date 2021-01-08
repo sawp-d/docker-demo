@@ -35,7 +35,7 @@ steps:
        - wget https://github.com/goodwithtech/dockle/releases/download/v0.3.1/dockle_0.3.1_Linux-64bit.tar.gz
        - tar -xf dockle_0.3.1_Linux-64bit.tar.gz -C /usr/local/bin
        - rm dockle_0.3.1_Linux-64bit.tar.gz
-       - dockle --exit-code 1 swacr.azurecr.io/sample/sw-hello-world:"1.0.$DRONE_BUILD_NUMBER"
+      # - dockle --exit-code 1 swacr.azurecr.io/sample/sw-hello-world:"1.0.$DRONE_BUILD_NUMBER"
        
   - name: trivy image
     image: aquasec/trivy
