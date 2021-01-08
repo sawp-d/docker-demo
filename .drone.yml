@@ -11,7 +11,7 @@ steps:
     settings:
       repo: sample/sw-hello-world
       tags: '1.0.${DRONE_BUILD_NUMBER}'
-      dry-run: true
+      dry-run: false
       
   - name: dockle
     image: goodwithtech/dockle
