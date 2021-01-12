@@ -7,7 +7,7 @@ ENV vault_version 1.5.4
 ENV DEBIAN_FRONTEND "noninteractive"
 
 RUN apt-get update && \
-    apt-get install -y curl
+    apt-get install -y wget curl && \
     #apt-get install -y docker wget curl unzip jq python3 python3-pip git bash dpkg && \
     #wget https://releases.hashicorp.com/terraform/$terraform_version/terraform_${terraform_version}_linux_amd64.zip && \
     #unzip terraform_${terraform_version}_linux_amd64.zip -d bin/ && \
@@ -21,7 +21,7 @@ RUN apt-get update && \
     #az --version && \
     curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin && \
     trivy filesystem --exit-code 0 --severity LOW,MEDIUM,HIGH --no-progress . && \
-    trivy filesystem --exit-code 1 --severity CRITICAL --no-progress . && \
+    trivy filesystem --exit-code 1 --severity CRITICAL --no-progress .
     #wget https://github.com/goodwithtech/dockle/releases/download/v0.3.1/dockle_0.3.1_Linux-64bit.tar.gz && \
     #tar -xf dockle_0.3.1_Linux-64bit.tar.gz -C /usr/local/bin && \
    # rm dockle_0.3.1_Linux-64bit.tar.gz && \
