@@ -12,6 +12,29 @@ steps:
       repo: sample/sw-hello-world
       tags: '1.0.${DRONE_BUILD_NUMBER}'
       dry_run: true
+ 
+  - name: build image
+     image: mcr.microsoft.com/azure-cli
+     environment: 
+       ARM_CLIENT_ID:
+        from_secret: ARM_CLIENT_ID
+       ARM_CLIENT_SECRET:
+        from_secret: ARM_CLIENT_SECRET
+       AZ_ACR_NAME:
+        from_secret: AZ_ACR_NAME
+       AZ_TENANT_ID:
+        from_secret: AZ_TENANT_ID
+       AZ_SUBSCRIPTION_ID: 
+        from_secret: AZ_SUBSCRIPTION_ID
+       RETRIES: 0
+       MAX_RETRIES: 3
+     commands:
+        - DRONE_SEMVER_PATCH=$DRONE_BUILD_NUMBER
+        - DRONE_SEMVER="drone$DRONE_SEMVER_PATCH"
+        - echo $DRONE_SEMVER
+        - az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $AZ_TENANT_ID
+        # - docker build -t "sample/hello-world:$DRONE_SEMVER" .
+        - az acr build -t sample/hello-world:"1.0.$DRONE_BUILD_NUMBER" -r $AZ_ACR_NAME .
       
   - name: dockle
     image: goodwithtech/dockle
