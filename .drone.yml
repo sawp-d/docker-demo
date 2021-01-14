@@ -12,7 +12,7 @@ steps:
     environment:
       <<: *tf_vars
     commands:
-      - trivy image --exit-code 0 --severity LOW,MEDIUM,HIGH node:14.15.4
+      - trivy image --exit-code 0 --severity HIGH node:14.15.4
       - trivy image --exit-code 1 --severity CRITICAL node:14.15.4
      # - trivy fs .
       #- trivy image --exit-code 0 --severity LOW,MEDIUM,HIGH plugins/docker:19.03.8 
