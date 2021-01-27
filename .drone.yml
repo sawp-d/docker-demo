@@ -32,18 +32,23 @@ steps:
       - echo $DRONE_SEMVER
       - az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $AZ_TENANT_ID
       # - docker build -t "sample/hello-world:$DRONE_SEMVER" .
-      - az acr build -t sample/hello-world:"1.0.$DRONE_BUILD_NUMBER" -r $AZ_ACR_NAME . --no-push
-      - wget https://github.com/goodwithtech/dockle/releases/download/v0.3.1/dockle_0.3.1_Linux-64bit.tar.gz
-      - tar zxvf dockle_0.3.1_Linux-64bit.tar.gz
-      - mv dockle /usr/local/bin
-      - dockle --exit-code 1 "swacr.azurecr.io/sample/hello-world":"1.0.$DRONE_BUILD_NUMBER"
+    #  - az acr build -t sample/hello-world:"1.0.$DRONE_BUILD_NUMBER" -r $AZ_ACR_NAME . --no-push
+    #  - wget https://github.com/goodwithtech/dockle/releases/download/v0.3.1/dockle_0.3.1_Linux-64bit.tar.gz
+     # - tar zxvf dockle_0.3.1_Linux-64bit.tar.gz
+     # - mv dockle /usr/local/bin
+    #  - dockle --exit-code 1 "swacr.azurecr.io/sample/hello-world":"1.0.$DRONE_BUILD_NUMBER"
 
   - name: trivy image
     image: aquasec/trivy
     environment:
       <<: *tf_vars
+      TRIVY_USERNAME:
+        from_secret: DOCKER_USERNAME
+      TRIVY_PASSWORD:
+        from_secret: DOCKER_PASSWORD
     commands:
-      - trivy image --exit-code 0 --severity HIGH node:14.15.4
+      - trivy image swacr.azurecr.io/sample/hello-world:1.0.145
+     # - trivy image --exit-code 0 --severity HIGH node:14.15.4
     #  - trivy image --exit-code 1 --severity CRITICAL node:14.15.4
      # - trivy fs .
       #- trivy image --exit-code 0 --severity LOW,MEDIUM,HIGH plugins/docker:19.03.8 
