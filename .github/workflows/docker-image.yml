@@ -16,17 +16,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag sw-docker-demo:$(date +%s)
-    - name: Aqua Security Trivy
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: 'sw-docker-demo:$(date +%s)'
-        exit-code: 1
-        severity: 'HIGH,CRITICAL'
-        # output format (table, json, template)
-        format: 'template'
-        template: '@/contrib/sarif.tpl'
-        # writes results to a file with the specified file name
-        output: 'trivy-results.sarif'
     - name: Upload Trivy scan results to GitHub Security tab
       uses: github/codeql-action/upload-sarif@v1
       with:
