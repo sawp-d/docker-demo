@@ -24,6 +24,7 @@ jobs:
         # image reference
         image-ref: 'sw-docker-demo:1.0.1'
         # output format (table, json, template)
+        severity: 'HIGH,CRITICAL'
         format: 'template'
         # use an existing template for rendering output (@/contrib/sarif.tpl, @/contrib/gitlab.tpl, @/contrib/junit.tpl
         template: '@/contrib/sarif.tpl'
