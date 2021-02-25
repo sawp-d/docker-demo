@@ -19,9 +19,9 @@ jobs:
     - name: Aqua Security Trivy
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: sw-docker-demo:$(date +%s)
+        image-ref: 'sw-docker-demo:$(date +%s)'
         exit-code: 1
-        severity: HIGH,CRITICAL
+        severity: 'HIGH,CRITICAL'
         # output format (table, json, template)
         format: 'template'
         template: '@/contrib/sarif.tpl'
