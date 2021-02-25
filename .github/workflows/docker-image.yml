@@ -15,14 +15,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag sw-docker-demo:$(date +%s)
+      run: docker build . --file Dockerfile --tag sw-docker-demo:1.0.1
     - name: Aqua Security Trivy
       # You may pin to the exact commit or the version.
       # uses: aquasecurity/trivy-action@2b5de510862c22b735aa586acbafe850cfe75148
       uses: aquasecurity/trivy-action@0.0.8
       with:
         # image reference
-        image-ref: 'sw-docker-demo:$(date +%s)'
+        image-ref: 'sw-docker-demo:1.0.1'
         # output format (table, json, template)
         format: 'template'
         # use an existing template for rendering output (@/contrib/sarif.tpl, @/contrib/gitlab.tpl, @/contrib/junit.tpl
