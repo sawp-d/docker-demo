@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:15.04.4
 
 VOLUME /terraform
 
