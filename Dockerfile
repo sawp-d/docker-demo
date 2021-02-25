@@ -1,13 +1,13 @@
 FROM ubuntu:14.04.4
 
-VOLUME /terraform
+#VOLUME /terraform
 
 ENV terraform_version 0.13.4
 ENV vault_version 1.5.4
 ENV DEBIAN_FRONTEND "noninteractive"
 
-RUN apt-get update && \
-    apt-get install -y wget curl && \
+#RUN apt-get update && \
+#    apt-get install -y wget curl && \
     #apt-get install -y docker wget curl unzip jq python3 python3-pip git bash dpkg && \
     #wget https://releases.hashicorp.com/terraform/$terraform_version/terraform_${terraform_version}_linux_amd64.zip && \
     #unzip terraform_${terraform_version}_linux_amd64.zip -d bin/ && \
@@ -27,6 +27,6 @@ RUN apt-get update && \
    # rm dockle_0.3.1_Linux-64bit.tar.gz && \
    # dockle --input .
     
-WORKDIR /terraform
+#WORKDIR /terraform
 
 CMD bash
