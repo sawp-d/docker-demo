@@ -19,9 +19,9 @@ RUN apt-get update && \
     #vault --version && \
     #terraform --version && \
     #az --version && \
-    curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin && \
-    trivy filesystem --exit-code 0 --severity LOW,MEDIUM --no-progress . && \
-    trivy filesystem --exit-code 1 --severity HIGH,CRITICAL --no-progress .
+    #curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin && \
+    #trivy filesystem --exit-code 0 --severity LOW,MEDIUM --no-progress . && \
+    #trivy filesystem --exit-code 1 --severity HIGH,CRITICAL --no-progress .
     #wget https://github.com/goodwithtech/dockle/releases/download/v0.3.1/dockle_0.3.1_Linux-64bit.tar.gz && \
     #tar -xf dockle_0.3.1_Linux-64bit.tar.gz -C /usr/local/bin && \
    # rm dockle_0.3.1_Linux-64bit.tar.gz && \
