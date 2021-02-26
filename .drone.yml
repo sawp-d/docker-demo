@@ -56,6 +56,15 @@ steps:
       #- trivy image --exit-code 0 --severity LOW,MEDIUM,HIGH -f json -o results01.json plugins/docker:19.03.8 
      # - trivy image --exit-code 1 --severity CRITICAL -f json -o results02.json plugins/docker:19.03.8
   
+  - name: codeql upload
+    image: mcr.microsoft.com/cstsectools/codeql-container
+    environment:
+      GITHUB_TOKEN:
+        from_secret: GITHUB_TOKEN
+      GITHUB_REPO: sawp-d/docker-demo
+    commands:
+      - codeql upload --help
+      
   - name: read file
     image: ubuntu:20.04
     environment:
