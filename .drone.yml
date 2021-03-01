@@ -30,8 +30,8 @@ steps:
       - DRONE_SEMVER_PATCH=$DRONE_BUILD_NUMBER
       - DRONE_SEMVER="drone$DRONE_SEMVER_PATCH"
       - echo $DRONE_SEMVER
-      - az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $AZ_TENANT_ID
-      - az acr build -t sample/codeql-runner:"1.0.$DRONE_BUILD_NUMBER" -t sample/codeql-runner:latest -r $AZ_ACR_NAME .
+     # - az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $AZ_TENANT_ID
+     # - az acr build -t sample/codeql-runner:"1.0.$DRONE_BUILD_NUMBER" -t sample/codeql-runner:latest -r $AZ_ACR_NAME .
       # - docker build -t "sample/hello-world:$DRONE_SEMVER" .
     #  - wget https://github.com/goodwithtech/dockle/releases/download/v0.3.1/dockle_0.3.1_Linux-64bit.tar.gz
      # - tar zxvf dockle_0.3.1_Linux-64bit.tar.gz
