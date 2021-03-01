@@ -40,7 +40,6 @@ steps:
   - name: run codeql
     image: swacr.azurecr.io/sample/codeql-runner
     commands:
-    - chmod +x bin/codeql-runner-linux
     - ls
     - codeql-runner-linux --help
     
