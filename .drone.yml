@@ -37,40 +37,22 @@ steps:
      # - tar zxvf dockle_0.3.1_Linux-64bit.tar.gz
      # - mv dockle /usr/local/bin
     #  - dockle --exit-code 1 "swacr.azurecr.io/sample/hello-world":"1.0.$DRONE_BUILD_NUMBER"
-
-  - name: trivy image
-    image: aquasec/trivy
-    environment:
-      <<: *tf_vars
-      TRIVY_USERNAME:
-        from_secret: DOCKER_USERNAME
-      TRIVY_PASSWORD:
-        from_secret: DOCKER_PASSWORD
-    commands:
-     # - trivy image swacr.azurecr.io/sample/hello-world:1.0.145
-     # - trivy image --exit-code 0 --severity HIGH node:14.15.4
-    #  - trivy image --exit-code 1 --severity CRITICAL node:14.15.4
-     # - trivy fs .
-      #- trivy image --exit-code 0 --severity LOW,MEDIUM,HIGH plugins/docker:19.03.8 
-     # - trivy image --exit-code 1 --severity CRITICAL plugins/docker:19.03.8 
-      #- trivy image --exit-code 0 --severity LOW,MEDIUM,HIGH -f json -o results01.json plugins/docker:19.03.8 
-     # - trivy image --exit-code 1 --severity CRITICAL -f json -o results02.json plugins/docker:19.03.8
-   - name: run codeql
-     image: swacr.azurecr.io/sample/codeql-runner
-     environment: 
-       ARM_CLIENT_ID:
+  - name: run codeql
+    image: swacr.azurecr.io/sample/codeql-runner
+    environment: 
+      ARM_CLIENT_ID:
         from_secret: ARM_CLIENT_ID
-       ARM_CLIENT_SECRET:
+      ARM_CLIENT_SECRET:
         from_secret: ARM_CLIENT_SECRET
-       AZ_ACR_NAME:
+      AZ_ACR_NAME:
         from_secret: AZ_ACR_NAME
-       AZ_TENANT_ID:
+      AZ_TENANT_ID:
         from_secret: AZ_TENANT_ID
-       AZ_SUBSCRIPTION_ID: 
+      AZ_SUBSCRIPTION_ID: 
         from_secret: AZ_SUBSCRIPTION_ID
-     commands:
-      - codeql-runner-linux --help
-      
+    commands:
+    - codeql-runner-linux --help
+
    
    
       
