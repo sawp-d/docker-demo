@@ -37,11 +37,31 @@ steps:
      # - tar zxvf dockle_0.3.1_Linux-64bit.tar.gz
      # - mv dockle /usr/local/bin
     #  - dockle --exit-code 1 "swacr.azurecr.io/sample/hello-world":"1.0.$DRONE_BUILD_NUMBER"
+  - name: trivy image
+    image: aquasec/trivy
+    environment:
+      <<: *tf_vars
+      TRIVY_USERNAME:
+        from_secret: DOCKER_USERNAME
+      TRIVY_PASSWORD:
+        from_secret: DOCKER_PASSWORD
+    commands:
+      - trivy image --format template --template "sarif.tpl" --output "trivy-results.sarif" swacr.azurecr.io/sample/hello-world:1.0.145 
+     # - trivy image --exit-code 0 --severity HIGH node:14.15.4
+    #  - trivy image --exit-code 1 --severity CRITICAL node:14.15.4
+     # - trivy fs .
+      #- trivy image --exit-code 0 --severity LOW,MEDIUM,HIGH plugins/docker:19.03.8 
+     # - trivy image --exit-code 1 --severity CRITICAL plugins/docker:19.03.8 
+      #- trivy image --exit-code 0 --severity LOW,MEDIUM,HIGH -f json -o results01.json plugins/docker:19.03.8 
+     # - trivy image --exit-code 1 --severity CRITICAL -f json -o results02.json plugins/docker:19.03.8
+     
   - name: run codeql
     image: swacr.azurecr.io/sample/codeql-runner
+    environment:
+      GITHUB_TOKEN:
+        from_secret: GITHUB_TOKEN
     commands:
-    - ls
-    - codeql-runner-linux --help
+    - codeql-runner-linux upload --sarif-file trivy-results.sarif --repository sawp-d/docker-demo --commit $DRONE_COMMIT --ref $DRONE_COMMIT_REF --github-url https://github.com --github-auth $GITHUB_TOKEN
     
 image_pull_secrets:
 - azurecrjson
