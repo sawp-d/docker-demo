@@ -12,7 +12,7 @@ steps:
     environment:
       <<: *tf_vars
     commands:
-      - trivy --format template --template "@/contrib/sarif.tpl" --output "trivy-results.sarif" image plugins/docker
+      - trivy image --format template --template "@contrib/sarif.tpl" --output "trivy-results.sarif" plugins/docker
      # - trivy image --exit-code 0 --severity HIGH node:14.15.4
     #  - trivy image --exit-code 1 --severity CRITICAL node:14.15.4
      # - trivy fs .
