@@ -40,6 +40,7 @@ steps:
   - name: run codeql
     image: swacr.azurecr.io/sample/codeql-runner
     commands:
+    - chmod +x codeql-runner-linux
     - codeql-runner-linux --help
     
 image_pull_secrets:
