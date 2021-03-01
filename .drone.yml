@@ -11,12 +11,9 @@ steps:
     image: aquasec/trivy
     environment:
       <<: *tf_vars
-      TRIVY_USERNAME:
-        from_secret: DOCKER_USERNAME
-      TRIVY_PASSWORD:
-        from_secret: DOCKER_PASSWORD
     commands:
       - trivy image plugins/docker
+      # --format template --template "sarif.tpl" --output "trivy-results.sarif" 
      # - trivy image --exit-code 0 --severity HIGH node:14.15.4
     #  - trivy image --exit-code 1 --severity CRITICAL node:14.15.4
      # - trivy fs .
