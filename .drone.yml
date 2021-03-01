@@ -28,7 +28,7 @@ steps:
         from_secret: GITHUB_TOKEN
     commands:
       - ls
-      - codeql-runner-linux upload --sarif-file trivy-results.sarif --repository sawp-d/docker-demo --commit $DRONE_COMMIT --ref $DRONE_COMMIT_REF --github-url https://github.com --github-auth $GITHUB_TOKEN
+      - codeql-runner-linux upload --sarif-file "trivy-results.sarif" --repository "sawp-d/docker-demo" --commit $DRONE_COMMIT --ref $DRONE_COMMIT_REF --github-url "https://github.com" --github-auth $GITHUB_TOKEN
     
 image_pull_secrets:
 - azurecrjson
