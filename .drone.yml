@@ -16,7 +16,7 @@ steps:
       TRIVY_PASSWORD:
         from_secret: DOCKER_PASSWORD
     commands:
-      - trivy image --format template --template "sarif.tpl" --output "trivy-results.sarif" swacr.azurecr.io/sample/hello-world:1.0.145 
+      - trivy image --format template --template "sarif.tpl" --output "trivy-results.sarif" plugins/docker
      # - trivy image --exit-code 0 --severity HIGH node:14.15.4
     #  - trivy image --exit-code 1 --severity CRITICAL node:14.15.4
      # - trivy fs .
