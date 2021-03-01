@@ -43,7 +43,7 @@ steps:
     - codeql-runner-linux --help
     
 image_pull_secrets:
-- dockerconfigjson
+- azurecrjson
 
    
    
