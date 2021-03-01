@@ -39,19 +39,11 @@ steps:
     #  - dockle --exit-code 1 "swacr.azurecr.io/sample/hello-world":"1.0.$DRONE_BUILD_NUMBER"
   - name: run codeql
     image: swacr.azurecr.io/sample/codeql-runner
-    environment: 
-      ARM_CLIENT_ID:
-        from_secret: ARM_CLIENT_ID
-      ARM_CLIENT_SECRET:
-        from_secret: ARM_CLIENT_SECRET
-      AZ_ACR_NAME:
-        from_secret: AZ_ACR_NAME
-      AZ_TENANT_ID:
-        from_secret: AZ_TENANT_ID
-      AZ_SUBSCRIPTION_ID: 
-        from_secret: AZ_SUBSCRIPTION_ID
     commands:
     - codeql-runner-linux --help
+    
+image_pull_secrets:
+- dockerconfigjson
 
    
    
