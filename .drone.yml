@@ -31,8 +31,8 @@ steps:
       - DRONE_SEMVER="drone$DRONE_SEMVER_PATCH"
       - echo $DRONE_SEMVER
       - az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $AZ_TENANT_ID
+      - az acr build -t sample/codeql-runner:"1.0.$DRONE_BUILD_NUMBER" -r $AZ_ACR_NAME .
       # - docker build -t "sample/hello-world:$DRONE_SEMVER" .
-    #  - az acr build -t sample/hello-world:"1.0.$DRONE_BUILD_NUMBER" -r $AZ_ACR_NAME . --no-push
     #  - wget https://github.com/goodwithtech/dockle/releases/download/v0.3.1/dockle_0.3.1_Linux-64bit.tar.gz
      # - tar zxvf dockle_0.3.1_Linux-64bit.tar.gz
      # - mv dockle /usr/local/bin
@@ -47,7 +47,7 @@ steps:
       TRIVY_PASSWORD:
         from_secret: DOCKER_PASSWORD
     commands:
-      - trivy image swacr.azurecr.io/sample/hello-world:1.0.145
+     # - trivy image swacr.azurecr.io/sample/hello-world:1.0.145
      # - trivy image --exit-code 0 --severity HIGH node:14.15.4
     #  - trivy image --exit-code 1 --severity CRITICAL node:14.15.4
      # - trivy fs .
@@ -55,23 +55,6 @@ steps:
      # - trivy image --exit-code 1 --severity CRITICAL plugins/docker:19.03.8 
       #- trivy image --exit-code 0 --severity LOW,MEDIUM,HIGH -f json -o results01.json plugins/docker:19.03.8 
      # - trivy image --exit-code 1 --severity CRITICAL -f json -o results02.json plugins/docker:19.03.8
-  
-  - name: codeql upload
-    image: mcr.microsoft.com/cstsectools/codeql-container
-    environment:
-      GITHUB_TOKEN:
-        from_secret: GITHUB_TOKEN
-      GITHUB_REPO: sawp-d/docker-demo
-    commands:
-      - codeql upload --help
-      
-  - name: read file
-    image: ubuntu:20.04
-    environment:
-      <<: *tf_vars
-    commands:
-     # - cat results01.json
-     # - cat results02.json
       
       
       
